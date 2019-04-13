@@ -1,7 +1,16 @@
 
+
 import inspect
 import test
 import ast
+
+"""
+with open("test.py", "r") as f:
+    content = f.readlines()
+    for line in content:
+        if "lambda" in line:
+            print(line)
+
 
 def get_long_lambda_source(lambda_func):
     try:
@@ -31,6 +40,12 @@ def get_short_lambda_ast_node(lambda_func):
     return source_lines
 
 
+
+
+"""
+
+import ast
+
 from pprint import pprint
 
 with open('test.py') as f:
@@ -38,5 +53,6 @@ with open('test.py') as f:
     module = ast.parse(data)
     function = module.body[0]
     for obj in function.body:
+
         print(obj)
 
