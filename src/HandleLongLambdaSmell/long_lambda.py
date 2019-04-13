@@ -1,6 +1,4 @@
-import inspect
-from test import TextImageGenerator
-
+"""
 with open("test.py", "r") as f:
     content = f.readlines()
     for line in content:
@@ -15,3 +13,14 @@ def get_short_lambda_source(lambda_func):
     if len(source_lines) > 1:
         return None
     return source_lines
+"""
+
+import ast
+from pprint import pprint
+
+with open('test.py') as f:
+    data = f.read()
+    module = ast.parse(data)
+    function = module.body[0]
+    for obj in function.body:
+        print(obj)
