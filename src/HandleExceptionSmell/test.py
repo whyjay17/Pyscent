@@ -28,6 +28,13 @@ def divide(x, y):
         print("Here is some\
             long long error message\
             .....")
-  
+        
+def test_lambda():
+    # rebind the paint function to implement curriculum learning
+        return lambda text: (0 if text % 2 == 0 else
+                              1)
+        test2 = lambda text: \
+            text % 2 == 0
+        test3 = lambda text: text %2 == 0
 # Look at parameters and note the working of Program 
 divide(3, 0) 

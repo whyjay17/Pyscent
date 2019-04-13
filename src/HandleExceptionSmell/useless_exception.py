@@ -19,6 +19,7 @@ with open('test.py') as f:
     data = f.read()
     module = ast.parse(data)
     function = module.body[0]
+    print('Number of functions = {}'.format(len(module.body)))
     print('number of try..except clauses = {}'.format(len([obj for obj in function.body if isinstance(obj, ast.Try)])))
     for obj in function.body:
         if isinstance(obj, ast.Try):
