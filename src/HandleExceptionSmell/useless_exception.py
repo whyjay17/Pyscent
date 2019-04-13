@@ -12,3 +12,6 @@
 ## 1) https://lignos.org/py_antipatterns/
 ## 2) https://legacy.python.org/dev/peps/pep-0008/
 
+with open("test.py", "r") as f:
+    content = f.readlines()
+    print(content)
