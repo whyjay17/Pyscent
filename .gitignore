@@ -2,6 +2,13 @@
 # Created by https://www.gitignore.io/api/pycharm,python,django
 # Edit at https://www.gitignore.io/?templates=pycharm,python,django
 
+.idea/cs527_project.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+
 ### Django ###
 *.log
 *.pot
