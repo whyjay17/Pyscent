@@ -6,7 +6,7 @@ from shutil import *
 
 
 if len(sys.argv) != 2:
-    print "target directory not specified"
+    print ("target directory not specified")
 
 matches = []
 path = "../code-dump" +"/"+os.path.basename(sys.argv[1])
@@ -22,7 +22,7 @@ for the_file in os.listdir(path):
     except Exception as e:
         print(e)
 
-print sys.argv[1]
+print (sys.argv[1])
 
 for root, dirnames, filenames in os.walk(sys.argv[1]):
     for filename in fnmatch.filter(filenames, '*.py'):
@@ -30,5 +30,5 @@ for root, dirnames, filenames in os.walk(sys.argv[1]):
 
 for idx,src in enumerate(matches):
     copy(src, dst)
-    print dst+"/"+os.path.basename(src)
+    print (dst+"/"+os.path.basename(src))
     os.rename(dst+"/"+os.path.basename(src), dst+"/"+str(idx)+os.path.basename(src))
