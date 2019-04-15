@@ -55,7 +55,7 @@ def detect_useless_exception(file_path):
                             print('Line {}: Empty exception detected.'.format(handler.lineno))
                             smelly_lines.append(handler.lineno)
 
-    return smelly_lines
+    return module
     
 
 def get_function_name(def_object):

@@ -4,8 +4,10 @@ def divide(x, y):
     try: 
         # Floor Division : Gives only Fractional Part as Answer 
         result = x // y 
+        test_lambda(aaa)
         print("Yeah ! Your answer is :", result) 
-    except ZeroDivisionError: 
+    except ZeroDivisionError:
+        test_lambda()
         print("Sorry ! You are dividing by zero ")
 
     try: 
