@@ -1,39 +1,36 @@
-
-
-import inspect
-import test
 import ast
+import astor
+import os
 
 
-def get_long_lambda_source(lambda_func):
-    try:
-        source_lines = inspect.getsource(lambda_func)
-        print (source_lines)
-    except IOError:
-        return None
+def detect_from_code_dump(directory,limit):
+    for filename in os.listdir(directory):
+        if filename.endswith(".py"):
+            long_lambdas = detect_long_lanmbda_function(directory+"/"+filename, limit)
+            if len(long_lambdas)>3:
+                print("========================")
+                print(filename)
+                print(long_lambdas)
+                print("========================")
 
-    if len(source_lines) > 10:
-        return source_lines
-    return None
 
-# print(get_long_lambda_source(test.test1))
-# print(get_long_lambda_source(test.test2))
-# print(get_long_lambda_source(test.test3))
 
-with open('test.py') as f:
-    data = f.read()
-    module = ast.parse(data)
-    function = module.body
-    for obj in function:
-        # print (obj.value)
-        print(get_long_lambda_source(obj.value))
-        # if isinstance(obj, ast.Lambda):
-        #     try_block = obj
-        #     print('number of excepts = {}'.format(len(try_block.handlers)))
-        #     for handler in try_block.handlers:
-        #         if handler.type is None or handler.type == 'Exception':
-        #             print('Line {}: Too general exception.'.format(handler.lineno))
-        #             continue
-        #         if len(handler.body) == 1 and isinstance(handler.body[0], ast.Pass):
-        #             print('Line {}: Empty exception detected.'.format(handler.lineno))
+def detect_long_lanmbda_function(file_path,limit):
+    with open(file_path) as f:
+        data = f.read()
+        tree = ast.parse(data)
+        return get_long_lambda_source(tree,limit)
+
+
+def get_long_lambda_source(tree,limit):
+    ret_arr = []
+    for node in ast.walk(tree):
+        if isinstance(node,ast.Lambda):
+            lambda_str = astor.to_source(node)
+            if len(lambda_str)>limit:
+                ret_arr.append(lambda_str)
+    return ret_arr
+
+
+detect_from_code_dump("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/flask-master",25)
 
