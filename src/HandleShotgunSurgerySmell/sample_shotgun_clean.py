@@ -26,3 +26,5 @@ class Customer(object):
         dollars."""
         self.balance += amount
         return self.balance
+    
+    

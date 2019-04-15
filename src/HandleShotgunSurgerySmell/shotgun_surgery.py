@@ -17,7 +17,7 @@ def detect_shotgun_surgery(file_path):
         file_path (string): path of the source code file to be detected
     
     Return:
-        analysis (dict[string]: string): ClassName: number of external calls / total calls
+        analysis (dict[string]: (string, bool)): ClassName: (number of external calls / total calls, isSmelly)
     
     """
     
@@ -33,10 +33,13 @@ def detect_shotgun_surgery(file_path):
                         functions.append(classObj.name)
                 for classObj in ast.walk(instance):
                     if isinstance(classObj, ast.Call):
-                        if astor.to_source(classObj).split('(')[0] not in functions:
+                        if astor.to_source(classObj).split('(')[0] not in functions and \
+                            'error' not in astor.to_source(classObj).split('(')[0].lower():
                             external_count += 1
                         total_count += 1
-                analysis[instance.name] = '{}/{} (external calls / total)'.format(external_count, total_count)
+                analysis[instance.name] = ('{}/{} (external calls / total)'.format(external_count, total_count), \
+                        True if external_count > 0 else False)
+                        # TODO: decide metric n
     
     return analysis
 
