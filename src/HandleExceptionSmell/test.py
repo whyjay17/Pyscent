@@ -1,40 +1,23 @@
-# Python code to illustrate 
-# working of try()  
-def divide(x, y): 
-    try: 
-        # Floor Division : Gives only Fractional Part as Answer 
-        result = x // y 
-        print("Yeah ! Your answer is :", result) 
-    except ZeroDivisionError: 
-        print("Sorry ! You are dividing by zero ")
+import unittest
+import useless_exception as UE
 
-    try: 
-        result = x // y 
-        print("Yeah ! Your answer is :", result) 
-    except: 
-        print("An error occurred") 
+file_path = 'sample_exception.py'
 
-    try: 
-        # Floor Division : Gives only Fractional Part as Answer 
-        result = x // y 
-        print("Yeah ! Your answer is :", result) 
-    except ZeroDivisionError: 
-        print("Sorry ! You are dividing by zero ")
-    except NameError: 
-        print("Name Error")
-    except MemoryError: 
-        print("Memory Error")
-    except AttributeError: 
-        print("Here is some\
-            long long error message\
-            .....")
+
+class TestSmellDetector(unittest.TestCase):
+
+    def test_function(self):
+        self.assertEqual(len(UE.detect_useless_exception(file_path)), 8)
+
+    def test_general_exception(self):
+        smelly_lines = UE.detect_useless_exception(file_path)
+        self.assertTrue(14 in smelly_lines)
+        self.assertTrue(62 in smelly_lines)
         
-def test_lambda():
-    # rebind the paint function to implement curriculum learning
-        return lambda text: (0 if text % 2 == 0 else
-                              1)
-        test2 = lambda text: \
-            text % 2 == 0
-        test3 = lambda text: text %2 == 0
-# Look at parameters and note the working of Program 
-divide(3, 0) 
+    def test_empty_exception(self):
+        smelly_lines = UE.detect_useless_exception(file_path)
+        self.assertTrue(35 in smelly_lines)
+        self.assertTrue(86 in smelly_lines)
+
+if __name__ == '__main__':
+    unittest.main()
