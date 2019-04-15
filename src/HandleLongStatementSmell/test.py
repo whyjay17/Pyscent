@@ -1,5 +1,5 @@
 import unittest
-from long_lambda import detect_long_lanmbda_function
+from long_statement import detect_long_lanmbda_function
 
 
 class TestSmellDetector(unittest.TestCase):

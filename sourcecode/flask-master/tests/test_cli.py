@@ -144,7 +144,7 @@ def test_find_best_app(test_apps):
 
 @pytest.mark.parametrize('value,path,result', (
     ('test', cwd, 'test'),
-    ('test.py', cwd, 'test'),
+    ('sample_lambda.py', cwd, 'test'),
     ('a/test', os.path.join(cwd, 'a'), 'test'),
     ('test/__init__.py', cwd, 'test'),
     ('test/__init__', cwd, 'test'),
