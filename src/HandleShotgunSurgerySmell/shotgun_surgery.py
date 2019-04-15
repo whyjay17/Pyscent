@@ -8,7 +8,6 @@
 
 import ast
 import astor
-from pprint import pprint
 
 def detect_shotgun_surgery(file_path):
     """ 
@@ -18,7 +17,26 @@ def detect_shotgun_surgery(file_path):
         file_path (string): path of the source code file to be detected
     
     Return:
-        smelly_lines (list[int]): list of lines that are smelly
+        analysis (dict[string]: string): ClassName: number of external calls / total calls
     
     """
     
+    analysis = {}
+    with open(file_path) as f:
+        data = f.read()
+        module = ast.parse(data)
+        for instance in module.body:
+            if isinstance(instance, ast.ClassDef):
+                functions, external_count, total_count = [], 0, 0
+                for classObj in instance.body:
+                    if isinstance(classObj, ast.FunctionDef):
+                        functions.append(classObj.name)
+                for classObj in ast.walk(instance):
+                    if isinstance(classObj, ast.Call):
+                        if astor.to_source(classObj).split('(')[0] not in functions:
+                            external_count += 1
+                        total_count += 1
+                analysis[instance.name] = '{}/{} (external calls / total)'.format(external_count, total_count)
+    
+    return analysis
+
