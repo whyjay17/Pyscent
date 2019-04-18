@@ -1,9 +1,10 @@
 import sys
 import os
 import collections
-
+import re
 sys.path.insert(0, 'CodeSmellHandlers/HandleLongMethodSmell')
 import long_method as lm
+
 
 def detect_long_method(directory):
     """ 
@@ -17,13 +18,13 @@ def detect_long_method(directory):
     
     """
     path, dirs, files = next(os.walk(directory))
-    output = lm.output_long_methods(directory)
+    output = lm.output_long_methods(directory).decode('utf-8')
+    # print (output.stdout)
     split_lines = output.splitlines()
-    output_lines = [output.decode('utf-8') for output in split_lines if len(output) > 3 and\
-                    ('R0915' in output.decode('utf-8') or 'R0913' in output.decode('utf-8') or 'R0912' in output.decode('utf-8') or \
-                    'R0904' in output.decode('utf-8') or 'R0902' in output.decode('utf-8'))]
-    
+    output_lines = [output for output in split_lines if len(output) > 3 and\
+                    re.search("(R0915|R0913|R0912|R0904|R0902)", output) is not None]
     return output_lines
+
 
 def analyze_result(smell_list):
     """ 
