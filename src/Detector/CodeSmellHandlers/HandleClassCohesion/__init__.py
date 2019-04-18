@@ -1,0 +1,1 @@
+import HandleClassCohesion.class_cohesion
