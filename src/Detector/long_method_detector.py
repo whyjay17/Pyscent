@@ -8,6 +8,6 @@ def detect_long_method(directory):
     path, dirs, files = next(os.walk(directory))
     output = lm.output_long_methods(directory)
     # print (output.stdout)
-    return str(output.stdout)
-    
-res = detect_long_method("../../code-dump/smaller-test")
+    return [output.decode('utf-8') for output in output.splitlines() if len(output) > 3]
+
+output_list = detect_long_method("../../code-dump/smaller-test")

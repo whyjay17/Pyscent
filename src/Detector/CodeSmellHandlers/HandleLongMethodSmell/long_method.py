@@ -3,13 +3,12 @@ from subprocess import run, PIPE
 import os
 
 def output_long_methods(directory):
+    # only display R (refactoring) messages
     cmd = "pylint --disable=E,W,C,F,I " + get_file_list(directory)
-    print (cmd)
     result = run(shlex.split(cmd), stdout=PIPE , cwd=directory)
     # out, err = process.communicate()
     # exit_code = process.wait()
-    print(result)
-    return result
+    return result.stdout
 
 def get_file_list(directory):
     file_list = []
