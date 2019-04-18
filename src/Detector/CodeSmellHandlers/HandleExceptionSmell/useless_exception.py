@@ -5,7 +5,18 @@
 import ast
 import astor
 from pprint import pprint
+import os
 
+def output_useless_exception(directory):
+    output_list = []
+    for filename in os.listdir(directory):
+        if filename.endswith(".py"):
+            print('filename = {}'.format(filename))
+            long_stmts = detect_useless_exception(directory + "/" + filename)
+            output_list.append((filename,long_stmts))
+            # print(filename)
+            # print(long_stmts)
+    return output_list
 
 def detect_useless_exception(file_path):
     """ 
@@ -24,7 +35,7 @@ def detect_useless_exception(file_path):
     
     smelly_lines = []
     
-    with open(file_path) as f:
+    with open(file_path, "rt", encoding='UTF8') as f:
         data = f.read()
         module = ast.parse(data)
         for instance in module.body:
@@ -55,7 +66,7 @@ def detect_useless_exception(file_path):
                             print('Line {}: Empty exception detected.'.format(handler.lineno))
                             smelly_lines.append(handler.lineno)
 
-    return module
+    return smelly_lines
     
 
 def get_function_name(def_object):

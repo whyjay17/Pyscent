@@ -2,8 +2,7 @@ import sys
 import os
 import collections
 import re
-sys.path.insert(0, 'CodeSmellHandlers/HandleLongMethodSmell')
-import long_method as lm
+import CodeSmellHandlers.HandleLongMethodSmell.long_method as lm
 
 
 def detect_long_method(directory):
