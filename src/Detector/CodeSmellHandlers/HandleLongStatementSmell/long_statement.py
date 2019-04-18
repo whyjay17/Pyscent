@@ -8,19 +8,31 @@ def output_long_statements(directory, limit, type):
     for filename in os.listdir(directory):
         if filename.endswith(".py"):
             long_stmts = detect_long_statement(directory + "/" + filename, limit, type)
-            output_list.append((filename,long_stmts))
-            # print(filename)
-            # print(long_stmts)
+            if len(long_stmts):
+                output_list.append((filename,long_stmts))
+    generate_log(output_list,type)
     return output_list
 
 
+def generate_log(output_list,type):
+    if type == ast.Lambda:
+        log = open("../../logs/long_lambda_logs", "w")
+    else:
+        log = open("../../logs/long_list_comp_logs", "w")
+    for file in output_list:
+        filename = file[0]
+        stmt_lineno_list = file[1]
+        for stmt_lineno in stmt_lineno_list:
+            log.write("filename: " + filename + " lineno: " + str(stmt_lineno[1]) + " metric: " + str(
+                len(stmt_lineno[0])) + "\n")
 
 
 def detect_long_statement(file_path, limit, type):
     with open(file_path) as f:
         data = f.read()
         tree = ast.parse(data)
-        return get_long_statement_source(tree, limit, type)
+        output = get_long_statement_source(tree, limit, type)
+        return output
 
 
 def get_long_statement_source(tree, limit, type):
@@ -29,7 +41,7 @@ def get_long_statement_source(tree, limit, type):
         if isinstance(node,type):
             statement_str = astor.to_source(node)[0:-1]
             if len(statement_str)>limit:
-                ret_arr.append(statement_str)
+                ret_arr.append((statement_str,node.lineno))
     return ret_arr
 
 

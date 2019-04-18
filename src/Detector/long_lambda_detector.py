@@ -10,4 +10,4 @@ def detect_long_lambda(directory, limit):
     return num_long_statements
 
 
-print(detect_long_lambda("../../code-dump/flask-master", 25))
+detect_long_lambda("../../code-dump/flask-master", 25)
