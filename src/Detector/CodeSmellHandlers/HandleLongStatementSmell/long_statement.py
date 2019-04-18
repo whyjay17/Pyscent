@@ -3,35 +3,36 @@ import astor
 import os
 
 
-def detect_from_code_dump(directory,limit,type):
+def output_long_statements(directory, limit, type):
+    output_list = []
     for filename in os.listdir(directory):
         if filename.endswith(".py"):
-            long_stmt = detect_long_lanmbda_function(directory+"/"+filename, limit,type)
-            if len(long_stmt)>3:
-                print("========================")
-                print(filename)
-                print(long_stmt)
-                print("========================")
+            long_stmts = detect_long_statement(directory + "/" + filename, limit, type)
+            output_list.append((filename,long_stmts))
+            # print(filename)
+            # print(long_stmts)
+    return output_list
 
 
 
-def detect_long_lanmbda_function(file_path,limit,type):
+
+def detect_long_statement(file_path, limit, type):
     with open(file_path) as f:
         data = f.read()
         tree = ast.parse(data)
-        return get_long_lambda_source(tree,limit,type)
+        return get_long_statement_source(tree, limit, type)
 
 
-def get_long_lambda_source(tree,limit,type):
+def get_long_statement_source(tree, limit, type):
     ret_arr = []
     for node in ast.walk(tree):
         if isinstance(node,type):
-            lambda_str = astor.to_source(node)
-            if len(lambda_str)>limit:
-                ret_arr.append(lambda_str)
+            statement_str = astor.to_source(node)[0:-1]
+            if len(statement_str)>limit:
+                ret_arr.append(statement_str)
     return ret_arr
 
 
-detect_from_code_dump("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/flask-master",25,ast.Lambda)
-detect_from_code_dump("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/keras-master",25,ast.ListComp)
+output_long_statements("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/flask-master", 25, ast.Lambda)
+output_long_statements("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/keras-master", 25, ast.ListComp)
 
