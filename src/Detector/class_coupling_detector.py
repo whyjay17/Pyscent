@@ -18,4 +18,4 @@ def detect_class_cohesion(directory, limit):
     print("total number classes " + str(total_num_classes) )
     return total_num_targets/total_num_classes
 
-print(detect_class_cohesion("../../code-dump/flask-master", 50))
+detect_class_cohesion("../../code-dump/flask-master", 50)
