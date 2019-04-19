@@ -20,9 +20,8 @@ def output_useless_exception(directory):
 
 
 def generate_log(dir_name, output_list):
-    log = open(r"\Users\YJ\Desktop\cs527_project\src\logs\{}_useless_exception_logs".format(dir_name), "w")
+    log = open(r"\Users\YJ\Desktop\cs527_project\logs\{}_useless_exception_logs".format(dir_name), "w")
     for file in output_list:
-        print(file)
         filename = file[0]
         smelly_lineno_list = file[1]
         if smelly_lineno_list:

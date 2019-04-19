@@ -41,7 +41,7 @@ def analyze_result(smell_list):
         elem = smell_to_obj(elem)
         analyzed[elem['smell_type']].append({'filename': elem['filename'], \
                 'lineno': elem['lineno'], 'metric': elem['metric']})
-    
+
     return analyzed
 
 def smell_to_obj(smell):
@@ -56,9 +56,9 @@ def smell_to_obj(smell):
     
     """
     
-    smell_name = {'R0915': 'Long Method', 'R0913': 'Long Parameter', \
-                  'R0912': 'Too Many Branches', 'R0904': 'Too Many Methods in Class', \
-                  'R0902': 'Too Many Attributes'}
+    smell_name = {'R0915': 'long_method', 'R0913': 'long_parameter', \
+                  'R0912': 'too_many_branches', 'R0904': 'too_many_methods', \
+                  'R0902': 'too_many_attributes'}
     
     tokens = [tok.lstrip() for tok in smell.split(':')]
     filename, lineno = tokens[0], int(tokens[1])
@@ -67,10 +67,16 @@ def smell_to_obj(smell):
     metric = int(tokens[4][first + 1 : sec])
     obj = {'filename': filename, 'lineno': lineno, 'smell_type': smell_name[smell_type], \
            'metric': metric}
-    
+        
     return obj
 
+def generate_log(log_object):
+    for smell in log_object:  
+        log = open(r"\Users\YJ\Desktop\cs527_project\src\logs\{}_logs".format(smell), "w")
+        for elem in log_object[smell]:
+            log.write('filename: {}, smelly_lines: {}, metric: {}\n'.format(elem['filename'], str(elem['lineno']), str(elem['metric'])))
 
 # TEST Runs
 output_list = detect_long_method("../../code-dump/keras-master")
 analyzed = analyze_result(output_list)
+generate_log(analyzed)
