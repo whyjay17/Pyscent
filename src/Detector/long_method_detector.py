@@ -18,7 +18,7 @@ def detect_long_method_wrapper(directory):
     num_many_attrb = (len(analyzed['too_many_attributes']), analyzed['too_many_attributes'][0])
     num_many_methods = (len(analyzed['too_many_methods']), analyzed['too_many_methods'][0])
     
-    return analyzed, num_long_methods, num_long_params, num_long_branches, \
+    return num_long_methods, num_long_params, num_long_branches, \
             num_many_attrb, num_many_methods
     
     
@@ -101,7 +101,7 @@ def generate_log(dirname, log_object):
 
 # TEST Runs: remove later
             
-op, num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
+num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
 detect_long_method_wrapper("../../code-dump/keras-master")
 
     

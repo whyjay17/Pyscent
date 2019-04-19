@@ -8,6 +8,7 @@
 
 import ast
 import astor
+import collections
 
 def detect_shotgun_surgery(file_path):
     """ 
@@ -20,8 +21,8 @@ def detect_shotgun_surgery(file_path):
         analysis (dict[string]: (string, bool)): ClassName: (number of external calls / total calls, isSmelly)
     
     """
-    
-    analysis = {}
+    # TODO: exclude function calls from stdlib or pip-packages
+    analysis = collections.defaultdict(list)
     with open(file_path) as f:
         data = f.read()
         module = ast.parse(data)
@@ -36,10 +37,16 @@ def detect_shotgun_surgery(file_path):
                         if astor.to_source(classObj).split('(')[0] not in functions and \
                             'error' not in astor.to_source(classObj).split('(')[0].lower():
                             external_count += 1
+                            analysis[instance.name].append(classObj.lineno)
                         total_count += 1
-                analysis[instance.name] = ('{}/{} (external calls / total)'.format(external_count, total_count), \
-                        True if external_count > 0 else False)
-                        # TODO: decide metric n
+                
+                if external_count > 0:
+                    analysis[instance.name].append('{}/{} (external calls / total)'.format(external_count, total_count))
+                    # analysis[instance.name].append(True if external_count > 0 else False)
+                # TODO: decide metric n
     
     return analysis
 
+
+
+# ana = detect_shotgun_surgery('sample_shotgun_smelly.py')
