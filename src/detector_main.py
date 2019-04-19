@@ -1,10 +1,18 @@
 import ast
 import os
+import fpdf
 
 def detect_main(directory):
     stats_dict = get_stats(directory)
     print(stats_dict["try"])
-    
+
+    pdf = fpdf.FPDF(format='letter')
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.write(50,"total number of try catch blocks " + str(stats_dict["try"]))
+    pdf.ln()
+    pdf.output("/Users/jaewookim/PycharmProjects/cs527_project/testings.pdf")
+
 
 
 def get_stats(directory):
@@ -35,6 +43,6 @@ def get_stats(directory):
             "try":total_num_try_catch,"listcomps":total_num_list_comp,\
             "codeblock":total_num_code_blocks}
 
-detect_main("../code-dump/flask-master")
+detect_main("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/flask-master")
 
 
