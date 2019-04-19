@@ -7,4 +7,4 @@ def detect_cyclomatic_complexity(directory):
     return int(number_of_blocks)
 
 
-print("number of code blocks with cyclomatic complexity lower than C rank: " + str(detect_cyclomatic_complexity("../../code-dump/flask-master")))
+# print("number of code blocks with cyclomatic complexity lower than C rank: " + str(detect_cyclomatic_complexity("../../code-dump/flask-master")))
