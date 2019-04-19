@@ -1,6 +1,7 @@
 import ast
 import os
 import fpdf
+from Detector.class_coupling_detector import detect_class_cohesion
 
 def detect_main(directory):
     stats_dict = get_stats(directory)
@@ -9,9 +10,13 @@ def detect_main(directory):
     pdf = fpdf.FPDF(format='letter')
     pdf.add_page()
     pdf.set_font("Arial", size=12)
-    pdf.write(50,"total number of try catch blocks " + str(stats_dict["try"]))
+    cohesion_output = "classes with low cohesion/total number of classes: " + str(detect_class_cohesion(directory,50)) +"/" + str(stats_dict["classes"])
+    pdf.write(5,cohesion_output)
     pdf.ln()
-    pdf.output("/Users/jaewookim/PycharmProjects/cs527_project/testings.pdf")
+    try_output = "total number of try catch blocks " + str(stats_dict["try"])
+    pdf.write(5,try_output)
+    pdf.ln()
+    pdf.output("./testings.pdf")
 
 
 
@@ -43,6 +48,6 @@ def get_stats(directory):
             "try":total_num_try_catch,"listcomps":total_num_list_comp,\
             "codeblock":total_num_code_blocks}
 
-detect_main("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/flask-master")
+detect_main("../code-dump/flask-master")
 
 
