@@ -8,15 +8,17 @@ def detect_long_method_wrapper(directory):
     
     output_list = detect_long_method(directory)
     analyzed = analyze_result(output_list)
-    generate_log(analyzed)
+    dirname = directory.split('/')[-1]
+    generate_log(dirname, analyzed)
 
-    num_long_methods = len(analyzed['long_methods'])
-    num_long_params = len(analyzed['long_parameter'])
-    num_long_branches = len(analyzed['too_many_branches'])
-    num_many_attrb = len(analyzed['too_many_attributes'])
-    num_many_methods = len(analyzed['too_many_methods'])
+    # type: (total number, largest metric)
+    num_long_methods = (len(analyzed['long_method']), analyzed['long_method'][0])
+    num_long_params = (len(analyzed['long_parameter']), analyzed['long_parameter'][0])
+    num_long_branches = (len(analyzed['too_many_branches']),analyzed['too_many_branches'][0])
+    num_many_attrb = (len(analyzed['too_many_attributes']), analyzed['too_many_attributes'][0])
+    num_many_methods = (len(analyzed['too_many_methods']), analyzed['too_many_methods'][0])
     
-    return num_long_methods, num_long_params, num_long_branches, \
+    return analyzed, num_long_methods, num_long_params, num_long_branches, \
             num_many_attrb, num_many_methods
     
     
@@ -52,13 +54,18 @@ def analyze_result(smell_list):
         smell_info (dict[list[dict]]): smell information categorized by smell_type
     
     """
+    
     analyzed = collections.defaultdict(list)
     for elem in smell_list:
         elem = smell_to_obj(elem)
         analyzed[elem['smell_type']].append({'filename': elem['filename'], \
                 'lineno': elem['lineno'], 'metric': elem['metric']})
+    sorted_analyzed = collections.defaultdict(list)
+    for smell in ['long_method', 'long_parameter', 'too_many_branches', 'too_many_methods', 'too_many_attributes']:
+        sorted_analyzed[smell] = sorted(analyzed[smell], key = lambda x: x['metric'], reverse = True)
 
-    return analyzed
+    return sorted_analyzed
+
 
 def smell_to_obj(smell):
     """ 
@@ -86,15 +93,15 @@ def smell_to_obj(smell):
         
     return obj
 
-def generate_log(log_object):
+def generate_log(dirname, log_object):
     for smell in log_object:  
-        log = open(r"\Users\YJ\Desktop\cs527_project\src\logs\{}_logs".format(smell), "w")
+        log = open(r"\Users\YJ\Desktop\cs527_project\logs\{}_{}_logs".format(dirname, smell), "w")
         for elem in log_object[smell]:
             log.write('filename: {}, smelly_lines: {}, metric: {}\n'.format(elem['filename'], str(elem['lineno']), str(elem['metric'])))
 
 # TEST Runs: remove later
             
-num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
+op, num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
 detect_long_method_wrapper("../../code-dump/keras-master")
 
     
