@@ -11,12 +11,23 @@ def output_useless_exception(directory):
     output_list = []
     for filename in os.listdir(directory):
         if filename.endswith(".py"):
-            print('filename = {}'.format(filename))
             long_stmts = detect_useless_exception(directory + "/" + filename)
             output_list.append((filename,long_stmts))
-            # print(filename)
-            # print(long_stmts)
+    dir_name = directory.split('/')[-1]
+    generate_log(dir_name, output_list)
+    
     return output_list
+
+
+def generate_log(dir_name, output_list):
+    log = open(r"\Users\YJ\Desktop\cs527_project\src\logs\{}_useless_exception_logs".format(dir_name), "w")
+    for file in output_list:
+        print(file)
+        filename = file[0]
+        smelly_lineno_list = file[1]
+        if smelly_lineno_list:
+            for lineno in smelly_lineno_list:
+                log.write('filename: {}, smelly_lines: {} ({})\n'.format(filename, str(lineno[0]), lineno[1]))
 
 def detect_useless_exception(file_path):
     """ 
@@ -47,24 +58,20 @@ def detect_useless_exception(file_path):
                         try_obj = obj
                         for handler in try_obj.handlers:
                             if handler.type is None or handler.type == 'Exception':
-                                print('Line {}: Too general exception.'.format(handler.lineno))
-                                smelly_lines.append(handler.lineno)
+                                smelly_lines.append((handler.lineno, 'Too general exception'))
                                 continue
                             if len(handler.body) == 1 and isinstance(handler.body[0], ast.Pass):
-                                print('Line {}: Empty exception detected.'.format(handler.lineno))
-                                smelly_lines.append(handler.lineno)
+                                smelly_lines.append((handler.lineno, 'Empty exception detected'))
             # when the try/exception is in a function
             else:
                 if isinstance(instance, ast.Try):
                     try_obj = instance
                     for handler in try_obj.handlers:
                         if handler.type is None or handler.type == 'Exception':
-                            print('Line {}: Too general exception.'.format(handler.lineno))
-                            smelly_lines.append(handler.lineno)
+                            smelly_lines.append((handler.lineno, 'Too general exception'))
                             continue
                         if len(handler.body) == 1 and isinstance(handler.body[0], ast.Pass):
-                            print('Line {}: Empty exception detected.'.format(handler.lineno))
-                            smelly_lines.append(handler.lineno)
+                            smelly_lines.append((handler.lineno, 'Empty exception detected'))
 
     return smelly_lines
     
@@ -84,3 +91,6 @@ def get_function_name(def_object):
     first_idx = func_str.index(' ')
     sec_idx = func_str.index('(')
     return func_str[first_idx + 1 : sec_idx]
+
+# Test - Remove Later3
+output_useless_exception("../../../../code-dump/scikit-learn-master")

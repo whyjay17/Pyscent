@@ -10,6 +10,7 @@ def output_long_statements(directory, limit, type):
             long_stmts = detect_long_statement(directory + "/" + filename, limit, type)
             if len(long_stmts):
                 output_list.append((filename,long_stmts))
+    print('output list', output_list)
     generate_log(output_list,type)
     return output_list
 
@@ -28,7 +29,7 @@ def generate_log(output_list,type):
 
 
 def detect_long_statement(file_path, limit, type):
-    with open(file_path) as f:
+    with open(file_path, encoding='UTF8') as f:
         data = f.read()
         tree = ast.parse(data)
         output = get_long_statement_source(tree, limit, type)
@@ -45,6 +46,6 @@ def get_long_statement_source(tree, limit, type):
     return ret_arr
 
 
-output_long_statements("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/flask-master", 25, ast.Lambda)
-output_long_statements("/Users/jaewookim/PycharmProjects/cs527_project/code-dump/keras-master", 25, ast.ListComp)
+output_long_statements("../../../../code-dump/flask-master", 25, ast.Lambda)
+output_long_statements("../../../../code-dump/keras-master", 25, ast.ListComp)
 
