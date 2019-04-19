@@ -4,7 +4,22 @@ import collections
 import re
 import CodeSmellHandlers.HandleLongMethodSmell.long_method as lm
 
+def detect_long_method_wrapper(directory):
+    
+    output_list = detect_long_method(directory)
+    analyzed = analyze_result(output_list)
+    generate_log(analyzed)
 
+    num_long_methods = len(analyzed['long_methods'])
+    num_long_params = len(analyzed['long_parameter'])
+    num_long_branches = len(analyzed['too_many_branches'])
+    num_many_attrb = len(analyzed['too_many_attributes'])
+    num_many_methods = len(analyzed['too_many_methods'])
+    
+    return num_long_methods, num_long_params, num_long_branches, \
+            num_many_attrb, num_many_methods
+    
+    
 def detect_long_method(directory):
     """ 
     Categorize smells based on their types and put filename, lineno, and metric info
@@ -22,6 +37,7 @@ def detect_long_method(directory):
     split_lines = output.splitlines()
     output_lines = [output for output in split_lines if len(output) > 3 and\
                     re.search("(R0915|R0913|R0912|R0904|R0902)", output) is not None]
+    
     return output_lines
 
 
@@ -76,7 +92,9 @@ def generate_log(log_object):
         for elem in log_object[smell]:
             log.write('filename: {}, smelly_lines: {}, metric: {}\n'.format(elem['filename'], str(elem['lineno']), str(elem['metric'])))
 
-# TEST Runs
-output_list = detect_long_method("../../code-dump/keras-master")
-analyzed = analyze_result(output_list)
-generate_log(analyzed)
+# TEST Runs: remove later
+            
+num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
+detect_long_method_wrapper("../../code-dump/keras-master")
+
+    
