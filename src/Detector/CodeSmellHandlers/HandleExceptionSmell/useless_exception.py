@@ -14,19 +14,23 @@ def output_useless_exception(directory):
             long_stmts = detect_useless_exception(directory + "/" + filename)
             output_list.append((filename,long_stmts))
     dir_name = directory.split('/')[-1]
-    generate_log(dir_name, output_list)
+    log_count = generate_log(dir_name, output_list)
     
-    return output_list
+    return ([line for line in output_list if line[1]], log_count)
 
 
 def generate_log(dir_name, output_list):
+    log_count = 0
     log = open(r"\Users\YJ\Desktop\cs527_project\logs\{}_useless_exception_logs".format(dir_name), "w")
     for file in output_list:
         filename = file[0]
         smelly_lineno_list = file[1]
         if smelly_lineno_list:
             for lineno in smelly_lineno_list:
-                log.write('filename: {}, smelly_lines: {} ({})\n'.format(filename, str(lineno[0]), lineno[1]))
+                log.write('FILENAME: {}, LINE: {} ({})\n'.format(filename, str(lineno[0]), lineno[1]))
+                log_count += 1
+    return log_count
+
 
 def detect_useless_exception(file_path):
     """ 
@@ -91,5 +95,5 @@ def get_function_name(def_object):
     sec_idx = func_str.index('(')
     return func_str[first_idx + 1 : sec_idx]
 
-# Test - Remove Later3
-output_useless_exception("../../../../code-dump/scikit-learn-master")
+# Test - Remove Later
+res, smell_count = output_useless_exception("../../../../code-dump/scikit-learn-master")
