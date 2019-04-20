@@ -26,7 +26,7 @@ def detect_main(directory):
 
     pdf.set_font("times", size=12)
     # Print Pylint Output
-    header_text = "Long Methods"
+    header_text = "[ Long Methods ]"
     write_pdf_line(pdf, header_text, 10)
     long_method, long_params, long_branches, many_attrbs, many_methods = \
         detect_pylint_output(directory)
@@ -41,7 +41,7 @@ def detect_main(directory):
     pylint_text = "              * Number of Statements: {}".format(long_method[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
     
-    header_text = "Long Parameter"
+    header_text = "[ Long Parameter ]"
     write_pdf_line(pdf, header_text, 10)
     pdf.set_font("times", size=12)
     pylint_text = "   - Number of Methods with Long Parameter / Total number of Methods: {} / {}".format(str(long_params[0]), str(stats_dict["methods"]))
@@ -55,7 +55,7 @@ def detect_main(directory):
     pylint_text = "              * Number of Parameters: {}".format(long_params[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
     
-    header_text = "Long Branches"
+    header_text = "[ Long Branches ]"
     write_pdf_line(pdf, header_text, 10)
     pdf.set_font("times", size=12)
     pylint_text = "   - Number of Long Branches: {}".format(str(long_branches[0]))
@@ -69,7 +69,7 @@ def detect_main(directory):
     pylint_text = "              * Number of Branches: {}".format(long_branches[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
     
-    header_text = "Too Many Attributes in Class"
+    header_text = "[ Too Many Attributes in Class ]"
     write_pdf_line(pdf, header_text, 10)
     pdf.set_font("times", size=12)
     pylint_text = "   - Number of Classes with Many Attributes: {}/{}".format(str(many_attrbs[0]), str(stats_dict["classes"]))
@@ -83,7 +83,7 @@ def detect_main(directory):
     pylint_text = "              * Number of Attributes in Class: {}".format(many_attrbs[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
        
-    header_text = "Too Many Methods in Class"
+    header_text = "[ Too Many Methods in Class ]"
     write_pdf_line(pdf, header_text, 10)
     pdf.set_font("times", size=12)
     pylint_text = "   - Number of Classes with Many Methods: {}/{}".format(str(many_methods[0]), str(stats_dict["classes"]))
@@ -99,7 +99,7 @@ def detect_main(directory):
     
     # Print useless try...except 
        
-    header_text = "Useless Try/Except Clauses"
+    header_text = "[ Useless Try/Except Clauses ]"
     write_pdf_line(pdf, header_text, 10)
     useless_try = detect_useless_exception(directory)
     body_text = "   - Number of Useless Try-Except / Total Try-Except: {}/{}".format(str(useless_try[1]), str(stats_dict["try"]))
@@ -107,7 +107,7 @@ def detect_main(directory):
 
     
     # Print Shotgun Surgery
-    header_text = "Shotgun Surgery"
+    header_text = "[ Shotgun Surgery ]"
     num_shotgun, most_external = detect_shotgun_surgery(directory)
     write_pdf_line(pdf, header_text, 10)
     body_text = "   - Smelly Class / Total Class: {}/{}".format(num_shotgun, str(stats_dict["classes"]))
@@ -122,21 +122,21 @@ def detect_main(directory):
     write_pdf_line(pdf, text, 10)
     
     # Print Cohesion Output
-    header_text = "Class Cohesion"
+    header_text = "[ Class Cohesion ]"
     write_pdf_line(pdf, header_text, 10)
     cohesion_output = detect_class_cohesion(directory, 30)
     cohesion_text = "   - Classes with Low Cohesion/Total number of Classe: {}/{}".format(str(cohesion_output), str(stats_dict["classes"]))
     write_pdf_line(pdf, cohesion_text, 10)
     
     # Print Code Complexity
-    header_text = "Code Complexity"
+    header_text = "[ Code Complexity ]"
     write_pdf_line(pdf, header_text, 10)
     cc_output = detect_cyclomatic_complexity(directory)
     cc_text = "   - Blocks with Cyclomatic Complexity Rank Lower than 'C' / Total Number of Code Blocks: {}/{}".format(str(cc_output), str(stats_dict["codeblocks"]))
     write_pdf_line(pdf, cc_text, 10)
     
     # Print Long Lambda
-    header_text = "Long Lambda"
+    header_text = "[ Long Lambda ]"
     write_pdf_line(pdf, header_text, 10)
     long_lambda_output = detect_long_lambda(directory,30)
     long_lambda_text = "   - Number of Long Lambda Functions / Number of Lambda Functions: {}/{}".format(str(long_lambda_output[0]), str(stats_dict["lambdas"]))
@@ -151,7 +151,7 @@ def detect_main(directory):
     write_pdf_line(pdf, text, 10)
     
     # Print Long List Comprehension
-    header_text = "Long List Comprehension"
+    header_text = "[ Long List Comprehension ]"
     write_pdf_line(pdf, header_text, 10)
     long_list_comp_output = detect_long_list_comp(directory,30)
     long_list_comp_text = "   - Number of Long List Comprehension / Number of List Comprehensions: {}/{}".format(str(long_list_comp_output[0]), str(stats_dict["listcomps"]))
