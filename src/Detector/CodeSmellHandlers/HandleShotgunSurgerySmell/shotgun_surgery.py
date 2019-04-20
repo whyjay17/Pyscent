@@ -10,7 +10,7 @@ import ast
 import astor
 import collections
 
-def detect_shotgun_surgery(file_path):
+def detect_shotgun_surgery_per_file(file_path):
     """ 
     Detect Shotgun Surgery: number of external function calls within a class
     
@@ -23,7 +23,7 @@ def detect_shotgun_surgery(file_path):
     """
     # TODO: exclude function calls from stdlib or pip-packages
     analysis = collections.defaultdict(list)
-    with open(file_path) as f:
+    with open(file_path, encoding='UTF8') as f:
         data = f.read()
         module = ast.parse(data)
         for instance in module.body:

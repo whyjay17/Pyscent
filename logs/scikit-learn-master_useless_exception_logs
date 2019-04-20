@@ -1,5 +1,5 @@
-filename: 0conftest.py, smelly_lines: 54 (Empty exception detected)
-: 168format_stack.py, LINE: 49 (Too general exception)
+FILENAME: 0conftest.py, LINE: 54 (Empty exception detected)
+FILENAME: 168format_stack.py, LINE: 49 (Too general exception)
 FILENAME: 168format_stack.py, LINE: 132 (Empty exception detected)
 FILENAME: 168format_stack.py, LINE: 339 (Empty exception detected)
 FILENAME: 169memory.py, LINE: 162 (Empty exception detected)
