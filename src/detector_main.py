@@ -6,6 +6,7 @@ from Detector.cyclomatic_complexity_detector import detect_cyclomatic_complexity
 from Detector.long_lambda_detector import detect_long_lambda
 from Detector.long_list_comp_detector import detect_long_list_comp
 from Detector.pylint_output_detector import detect_pylint_output
+from Detector.shotgun_surgery_detector import detect_shotgun_surgery
 
 def detect_main(directory):
     # Get stats for files in directory
@@ -18,7 +19,7 @@ def detect_main(directory):
     dirname = directory.split('/')[-1]
     
     # Print Title
-    pdf.set_font("Arial", style='b', size=24)
+    pdf.set_font("times", style='b', size=24)
     header_text = 'Code Smell Summary: {}'.format(dirname)
     write_pdf_line(pdf, header_text, 20)
     
@@ -29,73 +30,83 @@ def detect_main(directory):
     write_pdf_line(pdf, header_text, 10)
     long_method, long_params, long_branches, many_attrbs, many_methods = \
         detect_pylint_output(directory)
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("times", size=12)
     pylint_text = "   - Number of Long Methods / Total number of Methods: {} / {}".format(str(long_method[0]), str(stats_dict["methods"]))
     write_pdf_line(pdf, pylint_text, 10)
     pylint_text = "   - Longest Method:"
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - File Name: {}".format(long_method[1]['filename'])
+    pylint_text = "              * File Name: {}".format(long_method[1]['filename'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Line Number: {}".format(long_method[1]['lineno'])
+    pylint_text = "              * Line Number: {}".format(long_method[1]['lineno'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Number of Statements: {}".format(long_method[1]['metric'])
+    pylint_text = "              * Number of Statements: {}".format(long_method[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
     
     header_text = "Long Parameter"
     write_pdf_line(pdf, header_text, 10)
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("times", size=12)
     pylint_text = "   - Number of Methods with Long Parameter / Total number of Methods: {} / {}".format(str(long_params[0]), str(stats_dict["methods"]))
     write_pdf_line(pdf, pylint_text, 10)
     pylint_text = "   - Method with Longest Parameter:"
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - File Name: {}".format(long_params[1]['filename'])
+    pylint_text = "              * File Name: {}".format(long_params[1]['filename'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Line Number: {}".format(long_params[1]['lineno'])
+    pylint_text = "              * Line Number: {}".format(long_params[1]['lineno'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Number of Parameters: {}".format(long_params[1]['metric'])
+    pylint_text = "              * Number of Parameters: {}".format(long_params[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
     
     header_text = "Long Branches"
     write_pdf_line(pdf, header_text, 10)
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("times", size=12)
     pylint_text = "   - Number of Long Branches: {}".format(str(long_branches[0]))
     write_pdf_line(pdf, pylint_text, 10)
     pylint_text = "   - Longest Branch:"
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - File Name: {}".format(long_branches[1]['filename'])
+    pylint_text = "              * File Name: {}".format(long_branches[1]['filename'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Line Number: {}".format(long_branches[1]['lineno'])
+    pylint_text = "              * Line Number: {}".format(long_branches[1]['lineno'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Number of Branches: {}".format(long_branches[1]['metric'])
+    pylint_text = "              * Number of Branches: {}".format(long_branches[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
     
     header_text = "Too Many Attributes in Class"
     write_pdf_line(pdf, header_text, 10)
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("times", size=12)
     pylint_text = "   - Number of Classes with Many Attributes: {}/{}".format(str(many_attrbs[0]), str(stats_dict["classes"]))
     write_pdf_line(pdf, pylint_text, 10)
     pylint_text = "   - Class with most Attributes:"
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - File Name: {}".format(many_attrbs[1]['filename'])
+    pylint_text = "              * File Name: {}".format(many_attrbs[1]['filename'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Line Number: {}".format(many_attrbs[1]['lineno'])
+    pylint_text = "              * Line Number: {}".format(many_attrbs[1]['lineno'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Number of Attributes in Class: {}".format(many_attrbs[1]['metric'])
+    pylint_text = "              * Number of Attributes in Class: {}".format(many_attrbs[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
        
     header_text = "Too Many Methods in Class"
     write_pdf_line(pdf, header_text, 10)
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("times", size=12)
     pylint_text = "   - Number of Classes with Many Methods: {}/{}".format(str(many_methods[0]), str(stats_dict["classes"]))
     write_pdf_line(pdf, pylint_text, 10)
     pylint_text = "   - Class with most methods:"
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - File Name: {}".format(many_methods[1]['filename'])
+    pylint_text = "              * File Name: {}".format(many_methods[1]['filename'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Line Number: {}".format(many_methods[1]['lineno'])
+    pylint_text = "              * Line Number: {}".format(many_methods[1]['lineno'])
     write_pdf_line(pdf, pylint_text, 10)
-    pylint_text = "              - Number of Methods in Class: {}".format(many_methods[1]['metric'])
+    pylint_text = "              * Number of Methods in Class: {}".format(many_methods[1]['metric'])
     write_pdf_line(pdf, pylint_text, 10)
+    
+    # Print useless try...except 
+       
+    header_text = "Too Many Methods in Class"
+    write_pdf_line(pdf, header_text, 10)
+    pdf.set_font("times", size=12)
+    ##
+    
+    # Print Shotgun Surgery
+    
     
     # Print Cohesion Output
     header_text = "Class Cohesion"

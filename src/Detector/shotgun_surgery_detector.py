@@ -4,7 +4,7 @@ import collections
 from CodeSmellHandlers.HandleShotgunSurgerySmell.shotgun_surgery import detect_shotgun_surgery
 
 
-def call_shotgun_detector(directory):
+def detect_shotgun_surgery(directory):
     output_list = output_shotgun_surgery(directory)
     num_smelly_class, top = shotgun_output_formatter(output_list)
     
