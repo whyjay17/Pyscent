@@ -7,10 +7,7 @@ from Detector.long_lambda_detector import detect_long_lambda
 from Detector.long_list_comp_detector import detect_long_list_comp
 from Detector.pylint_output_detector import detect_pylint_output
 from Detector.shotgun_surgery_detector import detect_shotgun_surgery
-<<<<<<< HEAD
 from Detector.useless_exception_detector import detect_useless_exception
-=======
->>>>>>> c3769d17f7c3cb6212bd3fa05b90e6f5645a6e3f
 
 def detect_main(directory):
     # Get stats for files in directory
@@ -33,10 +30,6 @@ def detect_main(directory):
     write_pdf_line(pdf, header_text, 10)
     long_method, long_params, long_branches, many_attrbs, many_methods = \
         detect_pylint_output(directory)
-<<<<<<< HEAD
-=======
-    pdf.set_font("times", size=12)
->>>>>>> c3769d17f7c3cb6212bd3fa05b90e6f5645a6e3f
     pylint_text = "   - Number of Long Methods / Total number of Methods: {} / {}".format(str(long_method[0]), str(stats_dict["methods"]))
     write_pdf_line(pdf, pylint_text, 10)
     pylint_text = "   - Longest Method:"
@@ -106,7 +99,6 @@ def detect_main(directory):
     
     # Print useless try...except 
        
-<<<<<<< HEAD
     header_text = "Useless Try/Except Clauses"
     write_pdf_line(pdf, header_text, 10)
     useless_try = detect_useless_exception(directory)
@@ -128,15 +120,6 @@ def detect_main(directory):
     write_pdf_line(pdf, text, 10)
     text = "              * Number of External Function Calls: {}".format(most_external[2])
     write_pdf_line(pdf, text, 10)
-=======
-    header_text = "Too Many Methods in Class"
-    write_pdf_line(pdf, header_text, 10)
-    pdf.set_font("times", size=12)
-    ##
-    
-    # Print Shotgun Surgery
-    
->>>>>>> c3769d17f7c3cb6212bd3fa05b90e6f5645a6e3f
     
     # Print Cohesion Output
     header_text = "Class Cohesion"
