@@ -1,0 +1,8 @@
+filename: 11app.py, smelly_lines: 354, metric: 11
+filename: 8blueprints.py, smelly_lines: 118, metric: 10
+filename: 16helpers.py, smelly_lines: 454, metric: 8
+filename: 9cli.py, smelly_lines: 755, metric: 8
+filename: 54conf.py, smelly_lines: 76, metric: 7
+filename: 21test_basic.py, smelly_lines: 1531, metric: 6
+filename: 21test_basic.py, smelly_lines: 1924, metric: 6
+filename: 9cli.py, smelly_lines: 478, metric: 6
