@@ -4,9 +4,9 @@ import collections
 import re
 import CodeSmellHandlers.HandleLongMethodSmell.long_method as lm
 
-def detect_long_method_wrapper(directory):
+def detect_pylint_output(directory):
     
-    output_list = detect_long_method(directory)
+    output_list = detect_pylint_output_helper(directory)
     analyzed = analyze_result(output_list)
     dirname = directory.split('/')[-1]
     generate_log(dirname, analyzed)
@@ -18,11 +18,11 @@ def detect_long_method_wrapper(directory):
     num_many_attrb = (len(analyzed['too_many_attributes']), analyzed['too_many_attributes'][0])
     num_many_methods = (len(analyzed['too_many_methods']), analyzed['too_many_methods'][0])
     
-    return analyzed, num_long_methods, num_long_params, num_long_branches, \
+    return num_long_methods, num_long_params, num_long_branches, \
             num_many_attrb, num_many_methods
     
     
-def detect_long_method(directory):
+def detect_pylint_output_helper(directory):
     """ 
     Categorize smells based on their types and put filename, lineno, and metric info
     
@@ -101,7 +101,7 @@ def generate_log(dirname, log_object):
 
 # TEST Runs: remove later
             
-op, num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
-detect_long_method_wrapper("../../code-dump/keras-master")
+#obj, num_long_methods, num_long_params, num_long_branches, num_many_attrb, num_many_methods = \
+#detect_pylint_output("../../code-dump/flask-master")
 
     

@@ -12,7 +12,8 @@ def output_class_cohesion(directory):
 
 
 def generate_log(output):
-    print (output[1])
+    pass
+    # print (output[1])
     # log = open("../../logs/class_cohesion_logs", "w")
     # for file in output_list:
     #     filename = file[0]
