@@ -10,7 +10,6 @@ def output_long_statements(directory, limit, type):
             long_stmts = detect_long_statement(directory + "/" + filename, limit, type)
             if len(long_stmts):
                 output_list.append((filename,long_stmts))
-    print('output list', output_list)
     worst_code = generate_log(output_list,type)
     return (output_list,worst_code)
 

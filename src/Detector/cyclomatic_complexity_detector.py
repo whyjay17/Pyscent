@@ -3,6 +3,8 @@ from HandleCyclomaticComplexity.cyclomatic_complexity import output_cyclomatic_c
 def detect_cyclomatic_complexity(directory):
     output = output_cyclomatic_complexity(directory)
     output_arr = output.stdout.splitlines()
+    print("cyclomatic",output_arr)
+    # print(output.stdout.splitlines()[-3].split())
     number_of_blocks = output_arr[-3].split()[0]
     return int(number_of_blocks)
 
