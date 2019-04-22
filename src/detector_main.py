@@ -1,6 +1,7 @@
 import ast
 import os
 import fpdf
+import sys
 from Detector.class_coupling_detector import detect_class_cohesion
 from Detector.cyclomatic_complexity_detector import detect_cyclomatic_complexity
 from Detector.long_lambda_detector import detect_long_lambda
@@ -174,9 +175,11 @@ def detect_main(directory):
     text = "              * List Comprehension Length: {}".format(str(long_list_comp_output[1]['line length']))
     write_pdf_line(pdf, text, 10)
 
+    add_viz()
+
     plot_dir = "../plots"
+
     for filename in os.listdir(plot_dir):
-        print(filename)
         pdf.image(plot_dir + "/" + filename,w=pdf.w/3.0, h=pdf.h/5.0)
         pdf.ln(0.15)
     # Output stream to PDF

@@ -25,11 +25,11 @@ def generate_viz(data,label,filename):
 
 
 
-def add_viz(directory):
-    for filename in os.listdir(directory):
+def add_viz():
+    for filename in os.listdir("../output/logs/"):
         if filename.endswith("logs") and "exception" not in filename:
             print(filename)
-            file_path = directory + "/" + filename
+            file_path = "../output/logs/" + filename
             with open(file_path, encoding='UTF8') as f:
                 data = f.read()
                 if "many" in filename:
@@ -39,7 +39,7 @@ def add_viz(directory):
         # break;
 
 
-add_viz("../logs")
+# add_viz("../logs")
 
 
 

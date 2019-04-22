@@ -93,8 +93,9 @@ def smell_to_obj(smell):
     return obj
 
 def generate_log(dirname, log_object):
+    print(os.listdir())
     for smell in log_object:  
-        log = open("../output/logs/{}/{}_logs".format(smell), "w")
+        log = open("../output/logs/{}_logs".format(smell), "w")
         for elem in log_object[smell]:
             log.write('filename: {}, smelly_lines: {}, metric: {}\n'.format(elem['filename'], str(elem['lineno']), str(elem['metric'])))
 

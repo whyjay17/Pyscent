@@ -13,7 +13,7 @@ def detect_class_cohesion(directory, limit):
             target_percentage = float(output_arr[idx + 1].split("%")[0])
             if target_percentage<limit and target_percentage != 0.0:
                 total_num_targets +=1
-    print("total number of classes with cohesion below " + str(limit) + " percent: " + str(total_num_targets) )
+    # print("total number of classes with cohesion below " + str(limit) + " percent: " + str(total_num_targets) )
     return total_num_targets
 
 # detect_class_cohesion("../../code-dump/flask-master", 50)
