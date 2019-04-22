@@ -37,4 +37,5 @@ def output_shotgun_surgery(directory):
     return output_list
 
 # test run: remove later
-# ssout, top = detect_shotgun_surgery("../../code-dump/keras-master")
+# output = output_shotgun_surgery("../../code-dump/flask-master")
+# ssout, top = detect_shotgun_surgery("../../code-dump/flask-master")

@@ -32,15 +32,16 @@ def detect_shotgun_surgery_per_file(file_path):
                 for classObj in instance.body:
                     if isinstance(classObj, ast.FunctionDef):
                         functions.append(classObj.name)
+                        
                 for classObj in ast.walk(instance):
                     if isinstance(classObj, ast.Call):
-                        if astor.to_source(classObj).split('(')[0] not in functions and \
-                            'error' not in astor.to_source(classObj).split('(')[0].lower():
+                        if astor.to_source(classObj).split('(')[0].split('.')[-1] not in functions and \
+                            astor.to_source(classObj).split('(')[0].split('.')[-1] not in dir(__builtins__):
                             external_count += 1
                             analysis[instance.name].append(classObj.lineno)
                         total_count += 1
                 
-                if external_count > 0:
+                if external_count > 5: # n = 5
                     analysis[instance.name].append('{}/{} (external calls / total)'.format(external_count, total_count))
                     # analysis[instance.name].append(True if external_count > 0 else False)
                 # TODO: decide metric n
@@ -49,4 +50,4 @@ def detect_shotgun_surgery_per_file(file_path):
 
 
 
-# ana = detect_shotgun_surgery('sample_shotgun_smelly.py')
+# ana = detect_shotgun_surgery_per_file('sample_file.py')
