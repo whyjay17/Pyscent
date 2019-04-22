@@ -7,9 +7,6 @@ import CodeSmellHandlers.HandleLongMethodSmell.long_method as lm
 def detect_pylint_output(directory):
     
     output_list = detect_pylint_output_helper(directory)
-    print(directory)
-    print(os.getcwd())
-    print("output: ",output_list)
     analyzed = analyze_result(output_list)
     dirname = directory.split('/')[-1]
     generate_log(dirname, analyzed)
@@ -97,7 +94,7 @@ def smell_to_obj(smell):
 
 def generate_log(dirname, log_object):
     for smell in log_object:  
-        log = open(r"\Users\YJ\Desktop\cs527_project\logs\{}_{}_logs".format(dirname, smell), "w")
+        log = open("../output/logs/{}/{}_logs".format(smell), "w")
         for elem in log_object[smell]:
             log.write('filename: {}, smelly_lines: {}, metric: {}\n'.format(elem['filename'], str(elem['lineno']), str(elem['metric'])))
 

@@ -15,7 +15,7 @@ def detect_useless_exception(directory):
 
 def generate_log(dir_name, output_list):
     log_count = 0
-    log = open(r"\Users\YJ\Desktop\cs527_project\logs\{}_useless_exception_logs".format(dir_name), "w")
+    log = open('../output/logs/smell/useless_exception/useless_exception_logs", "w")
     for file in output_list:
         filename = file[0]
         smelly_lineno_list = file[1]
