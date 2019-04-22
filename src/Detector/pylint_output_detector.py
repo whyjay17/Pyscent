@@ -7,6 +7,9 @@ import CodeSmellHandlers.HandleLongMethodSmell.long_method as lm
 def detect_pylint_output(directory):
     
     output_list = detect_pylint_output_helper(directory)
+    print(directory)
+    print(os.getcwd())
+    print("output: ",output_list)
     analyzed = analyze_result(output_list)
     dirname = directory.split('/')[-1]
     generate_log(dirname, analyzed)
@@ -39,7 +42,6 @@ def detect_pylint_output_helper(directory):
     split_lines = output.splitlines()
     output_lines = [output for output in split_lines if len(output) > 3 and\
                     re.search("(R0915|R0913|R0912|R0904|R0902)", output) is not None]
-    
     return output_lines
 
 
