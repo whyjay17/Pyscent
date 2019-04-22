@@ -180,7 +180,7 @@ def detect_main(directory):
         pdf.image(plot_dir + "/" + filename,w=pdf.w/3.0, h=pdf.h/5.0)
         pdf.ln(0.15)
     # Output stream to PDF
-    pdf.output("./{}_review.pdf".format(dirname))
+    pdf.output("../output/{}_review.pdf".format(dirname))
 
 
 def write_pdf_line(pdf, text, text_height):

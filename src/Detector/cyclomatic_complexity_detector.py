@@ -7,7 +7,7 @@ def detect_cyclomatic_complexity(directory):
     print("cyclomatic",output_arr)
     # print(output.stdout.splitlines()[-3].split())
     number_of_blocks = output_arr[-2].split()[0]
-
+    print(number_of_blocks)
     # number_of_blocks = output_arr[-3].split()[0]
     # number_of_blocks = output_arr[-2].split()[0]
 
