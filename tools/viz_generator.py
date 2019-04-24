@@ -20,16 +20,19 @@ def generate_viz(data,label,filename):
     xlabel("file names")
     title(filename)
     ylabel(label)
-    savefig("../plots/" + filename,bbox_inches = "tight")
+    plot_dir = os.path.join("plots")
+    if not os.path.exists(os.path.join(plot_dir)):
+        os.makedirs(os.path.join(plot_dir))
+    savefig(os.path.join("plots", filename), bbox_inches = "tight")
     show()
 
 
 
 def add_viz():
-    for filename in os.listdir("../output/logs/"):
+    for filename in os.listdir(os.path.join("output", "logs")):
         if filename.endswith("logs") and "exception" not in filename:
             print(filename)
-            file_path = "../output/logs/" + filename
+            file_path = os.path.join("output", "logs", filename)
             with open(file_path, encoding='UTF8') as f:
                 data = f.read()
                 if "many" in filename:

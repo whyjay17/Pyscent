@@ -12,7 +12,7 @@ def main():
 if __name__ == "__main__":
     # main()
     print(sys.argv)
-    #detector.detect_main("./code-dump/"+sys.argv[1])
+    detector.detect_main("./code-dump/"+sys.argv[1])
 
 #if len(sys.argv) != 2:
 #    print ("target directory not specified")

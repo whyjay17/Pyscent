@@ -177,13 +177,13 @@ def detect_main(directory):
 
     add_viz()
 
-    plot_dir = "../plots"
+    plot_dir = os.path.join("plots")
 
     for filename in os.listdir(plot_dir):
-        pdf.image(plot_dir + "/" + filename,w=pdf.w/3.0, h=pdf.h/5.0)
+        pdf.image(os.path.join("plots", filename), w = pdf.w/3.0, h = pdf.h/5.0)
         pdf.ln(0.15)
     # Output stream to PDF
-    pdf.output("../output/{}_review.pdf".format(dirname))
+    pdf.output(os.path.join("output", "{}_review.pdf".format(dirname)))
 
 
 def write_pdf_line(pdf, text, text_height):
