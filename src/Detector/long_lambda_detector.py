@@ -1,5 +1,5 @@
 import ast
-from CodeSmellHandlers.HandleLongStatementSmell.long_statement import output_long_statements
+from .CodeSmellHandlers.HandleLongStatementSmell.long_statement import output_long_statements
 
 def detect_long_lambda(directory, limit):
     num_long_statements = 0

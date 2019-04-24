@@ -1,7 +1,7 @@
 import os
 import collections
 
-from CodeSmellHandlers.HandleShotgunSurgerySmell.shotgun_surgery import detect_shotgun_surgery_per_file
+from .CodeSmellHandlers.HandleShotgunSurgerySmell.shotgun_surgery import detect_shotgun_surgery_per_file
 
 
 def detect_shotgun_surgery(directory):

@@ -1,5 +1,5 @@
 import os
-from CodeSmellHandlers.HandleExceptionSmell.useless_exception import detect_useless_exception_per_file
+from .CodeSmellHandlers.HandleExceptionSmell.useless_exception import detect_useless_exception_per_file
 
 def detect_useless_exception(directory):
     output_list = []

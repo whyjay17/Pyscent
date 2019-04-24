@@ -2,13 +2,13 @@ import ast
 import os
 import fpdf
 import sys
-from Detector.class_coupling_detector import detect_class_cohesion
-from Detector.cyclomatic_complexity_detector import detect_cyclomatic_complexity
-from Detector.long_lambda_detector import detect_long_lambda
-from Detector.long_list_comp_detector import detect_long_list_comp
-from Detector.pylint_output_detector import detect_pylint_output
-from Detector.shotgun_surgery_detector import detect_shotgun_surgery
-from Detector.useless_exception_detector import detect_useless_exception
+from .Detector.class_coupling_detector import detect_class_cohesion
+from .Detector.cyclomatic_complexity_detector import detect_cyclomatic_complexity
+from .Detector.long_lambda_detector import detect_long_lambda
+from .Detector.long_list_comp_detector import detect_long_list_comp
+from .Detector.pylint_output_detector import detect_pylint_output
+from .Detector.shotgun_surgery_detector import detect_shotgun_surgery
+from .Detector.useless_exception_detector import detect_useless_exception
 from tools.viz_generator import add_viz
 
 def detect_main(directory):
@@ -219,6 +219,4 @@ def get_stats(directory):
             "try":total_num_try_catch,"listcomps":total_num_list_comp,\
             "codeblocks":total_num_code_blocks}
 
-detect_main("../code-dump/flask-master")
-
-
+#detect_main("../code-dump/flask-master")

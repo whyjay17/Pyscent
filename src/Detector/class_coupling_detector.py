@@ -1,4 +1,4 @@
-from CodeSmellHandlers.HandleClassCohesion.class_cohesion import output_class_cohesion
+from .CodeSmellHandlers.HandleClassCohesion.class_cohesion import output_class_cohesion
 import os
 
 
