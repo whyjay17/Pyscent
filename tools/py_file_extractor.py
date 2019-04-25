@@ -6,13 +6,15 @@ from shutil import *
 
 
 if len(sys.argv) != 2:
-    print ("target directory not specified")
-
+    print("target directory not specified")
+print('cwd',os.getcwd())
 matches = []
-path = "../code-dump" +"/"+os.path.basename(sys.argv[1])
+path = os.path.join("code-dump", os.path.basename(sys.argv[1]))
+# path = "../code-dump" +"/"+os.path.basename(sys.argv[1])
 if not os.path.exists(path):
     os.makedirs(path)
-dst = "../code-dump" +"/"+os.path.basename(sys.argv[1])
+# dst = "../code-dump" +"/"+os.path.basename(sys.argv[1])
+dst = os.path.join("code-dump", os.path.basename(sys.argv[1]))
 
 for the_file in os.listdir(path):
     file_path = os.path.join(path, the_file)
@@ -22,7 +24,7 @@ for the_file in os.listdir(path):
     except Exception as e:
         print(e)
 
-print (sys.argv[1])
+# print(sys.argv[1])
 
 for root, dirnames, filenames in os.walk(sys.argv[1]):
     for filename in fnmatch.filter(filenames, '*.py'):
@@ -30,5 +32,5 @@ for root, dirnames, filenames in os.walk(sys.argv[1]):
 
 for idx,src in enumerate(matches):
     copy(src, dst)
-    print (dst+"/"+os.path.basename(src))
+    # print(dst+"/"+os.path.basename(src))
     os.rename(dst+"/"+os.path.basename(src), dst+"/"+str(idx)+os.path.basename(src))

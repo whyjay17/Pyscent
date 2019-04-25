@@ -10,13 +10,12 @@ def generate_viz(data,label,filename):
         return
     for idx,line in enumerate(lines):
         line_arr = line.split()
-        print(line_arr)
         x_val.append(line_arr[1])
         y_val.append(int(line_arr[5]))
         if idx == 20:
             break
     bar(x_val,y_val)
-    xticks(rotation=90)
+    xticks(rotation = 90)
     xlabel("file names")
     title(filename)
     ylabel(label)
@@ -24,14 +23,13 @@ def generate_viz(data,label,filename):
     if not os.path.exists(os.path.join(plot_dir)):
         os.makedirs(os.path.join(plot_dir))
     savefig(os.path.join("plots", filename), bbox_inches = "tight")
-    show()
+    # show()
 
 
 
 def add_viz():
     for filename in os.listdir(os.path.join("output", "logs")):
         if filename.endswith("logs") and "exception" not in filename:
-            print(filename)
             file_path = os.path.join("output", "logs", filename)
             with open(file_path, encoding='UTF8') as f:
                 data = f.read()

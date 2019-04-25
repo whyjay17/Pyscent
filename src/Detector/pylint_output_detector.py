@@ -35,7 +35,6 @@ def detect_pylint_output_helper(directory):
     """
     path, dirs, files = next(os.walk(directory))
     output = output_long_methods(directory).decode('utf-8')
-    # print (output.stdout)
     split_lines = output.splitlines()
     output_lines = [output for output in split_lines if len(output) > 3 and\
                     re.search("(R0915|R0913|R0912|R0904|R0902)", output) is not None]

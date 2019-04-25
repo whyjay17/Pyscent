@@ -7,6 +7,3 @@ def detect_long_list_comp(directory, limit):
     for file_stmt_tuple in output[0]:
         num_long_statements += len(file_stmt_tuple[1])
     return (num_long_statements,output[1])
-
-
-# print(detect_long_list_comp("../../code-dump/flask-master", 25))

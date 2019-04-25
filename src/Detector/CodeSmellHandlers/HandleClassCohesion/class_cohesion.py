@@ -3,7 +3,6 @@ from subprocess import run, PIPE
 import os
 
 def output_class_cohesion(directory):
-    print(directory)
     cmd = "cohesion --files " + get_file_list(directory) \
           # + "--below " + 100
     output = run(shlex.split(cmd), stdout=PIPE , cwd=directory)

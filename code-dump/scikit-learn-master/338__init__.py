@@ -1,43 +1,38 @@
 """
-The :mod:`sklearn.feature_selection` module implements feature selection
-algorithms. It currently includes univariate filter selection methods and the
-recursive feature elimination algorithm.
+The :mod:`sklearn.covariance` module includes methods and algorithms to
+robustly estimate the covariance of features given a set of points. The
+precision matrix defined as the inverse of the covariance is also estimated.
+Covariance estimation is closely related to the theory of Gaussian Graphical
+Models.
 """
 
-from .univariate_selection import chi2
-from .univariate_selection import f_classif
-from .univariate_selection import f_oneway
-from .univariate_selection import f_regression
-from .univariate_selection import SelectPercentile
-from .univariate_selection import SelectKBest
-from .univariate_selection import SelectFpr
-from .univariate_selection import SelectFdr
-from .univariate_selection import SelectFwe
-from .univariate_selection import GenericUnivariateSelect
-
-from .variance_threshold import VarianceThreshold
-
-from .rfe import RFE
-from .rfe import RFECV
-
-from .from_model import SelectFromModel
-
-from .mutual_info_ import mutual_info_regression, mutual_info_classif
+from .empirical_covariance_ import empirical_covariance, EmpiricalCovariance, \
+    log_likelihood
+from .shrunk_covariance_ import shrunk_covariance, ShrunkCovariance, \
+    ledoit_wolf, ledoit_wolf_shrinkage, \
+    LedoitWolf, oas, OAS
+from .robust_covariance import fast_mcd, MinCovDet
+from .graph_lasso_ import graph_lasso, GraphLasso, GraphLassoCV,\
+    graphical_lasso, GraphicalLasso, GraphicalLassoCV
+from .elliptic_envelope import EllipticEnvelope
 
 
-__all__ = ['GenericUnivariateSelect',
-           'RFE',
-           'RFECV',
-           'SelectFdr',
-           'SelectFpr',
-           'SelectFwe',
-           'SelectKBest',
-           'SelectFromModel',
-           'SelectPercentile',
-           'VarianceThreshold',
-           'chi2',
-           'f_classif',
-           'f_oneway',
-           'f_regression',
-           'mutual_info_classif',
-           'mutual_info_regression']
+__all__ = ['EllipticEnvelope',
+           'EmpiricalCovariance',
+           'GraphLasso',
+           'GraphLassoCV',
+           'GraphicalLasso',
+           'GraphicalLassoCV',
+           'LedoitWolf',
+           'MinCovDet',
+           'OAS',
+           'ShrunkCovariance',
+           'empirical_covariance',
+           'fast_mcd',
+           'graph_lasso',
+           'graphical_lasso',
+           'ledoit_wolf',
+           'ledoit_wolf_shrinkage',
+           'log_likelihood',
+           'oas',
+           'shrunk_covariance']
