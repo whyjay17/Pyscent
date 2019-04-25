@@ -11,7 +11,6 @@ def generate_viz(data,label,filename):
         return
     for idx,line in enumerate(lines):
         line_arr = line.split()
-        print(line)
         x_val.append(line_arr[1])
         y_val.append(int(line_arr[5]))
         if idx == 20:
