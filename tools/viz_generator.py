@@ -5,16 +5,18 @@ output_list = []
 def generate_viz(data,label,filename):
     x_val = []
     y_val = []
+    figure()
     lines = data.splitlines()
     if len(lines) < 2 :
         return
     for idx,line in enumerate(lines):
         line_arr = line.split()
+        print(line)
         x_val.append(line_arr[1])
         y_val.append(int(line_arr[5]))
         if idx == 20:
             break
-    bar(x_val,y_val)
+    bar(x_val,y_val,color = "blue")
     xticks(rotation = 90)
     xlabel("file names")
     title(filename)
@@ -35,7 +37,7 @@ def add_viz():
                 data = f.read()
                 if "many" in filename:
                     generate_viz(data,"count",filename)
-                if "long" in filename:
+                elif "long" in filename:
                     generate_viz(data,"number of characters",filename)
         # break;
 
