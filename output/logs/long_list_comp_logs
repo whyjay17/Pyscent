@@ -1,7 +1,0 @@
-filename: 19cli.py lineno: 59 metric: 64
-filename: 19cli.py lineno: 853 metric: 69
-filename: 19cli.py lineno: 862 metric: 49
-filename: 35tag.py lineno: 137 metric: 45
-filename: 35tag.py lineno: 150 metric: 45
-filename: 37make-release.py lineno: 48 metric: 36
-filename: 44test_helpers.py lineno: 390 metric: 65
