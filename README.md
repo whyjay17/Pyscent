@@ -11,8 +11,12 @@
 - Provide analysis of code smells through data visualization
 
 ## Process Flow
-![Process Flow](https://i.imgur.com/dHa0XH0.png)
+![Process Flow](https://i.imgur.com/2HsO83e.png)
 
+## How to Run
+![Process Flow](https://i.imgur.com/2HsO83e.png)
+- `cd <pyscent_root_directory>`
+- `python pyscent.py <path_to_project_to_inspect>`
 ## Used Tools
 ### Static Code Analysis Tools
 - pylint (https://www.pylint.org)
