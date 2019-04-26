@@ -25,6 +25,10 @@
 - Cohesion (https://github.com/mschwager/cohesion)
 ### Libraries
 - ast — Abstract Syntax Trees (https://docs.python.org/3/library/ast.html)
+- astor - Manupulation of Python Source via the AST (https://pypi.org/project/astor)
+- matplotlib - Visualization of Code Smell Metrics (https://matplotlib.org)
+- subprocess - Subprocess Management (https://docs.python.org/2/library/subprocess.html)
+- shlex - Simple Lexcial Analysis (https://docs.python.org/3/library/shlex.html)
 - etc.
 
 ## Team
