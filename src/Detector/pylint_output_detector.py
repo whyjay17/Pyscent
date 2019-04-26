@@ -12,12 +12,12 @@ def detect_pylint_output(directory):
     generate_log(dirname, analyzed)
 
     # type: (total number, largest metric)
-    num_long_methods = (len(analyzed['long_method']), analyzed['long_method'][0])
-    num_long_params = (len(analyzed['long_parameter']), analyzed['long_parameter'][0])
-    num_long_branches = (len(analyzed['too_many_branches']),analyzed['too_many_branches'][0])
-    num_many_attrb = (len(analyzed['too_many_attributes']), analyzed['too_many_attributes'][0])
-    num_many_methods = (len(analyzed['too_many_methods']), analyzed['too_many_methods'][0])
-    
+    na_tuple = (0, {'filename': 'N/A', 'lineno': 'N/A', 'metric': 'N/A'})
+    num_long_methods = (len(analyzed['long_method']), analyzed['long_method'][0]) if len(analyzed['long_method']) > 0 else na_tuple
+    num_long_params = (len(analyzed['long_parameter']), analyzed['long_parameter'][0]) if len(analyzed['long_parameter']) > 0 else na_tuple
+    num_long_branches = (len(analyzed['too_many_branches']),analyzed['too_many_branches'][0]) if len(analyzed['too_many_branches']) > 0 else na_tuple
+    num_many_attrb = (len(analyzed['too_many_attributes']), analyzed['too_many_attributes'][0]) if len(analyzed['too_many_attributes']) > 0 else na_tuple
+    num_many_methods = (len(analyzed['too_many_methods']), analyzed['too_many_methods'][0]) if len(analyzed['too_many_methods']) > 0 else na_tuple
     return num_long_methods, num_long_params, num_long_branches, \
             num_many_attrb, num_many_methods
     
