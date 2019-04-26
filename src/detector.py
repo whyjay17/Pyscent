@@ -150,14 +150,16 @@ def detect_main(directory):
     long_lambda_text = "   - Number of Long Lambda Functions / Number of Lambda Functions: {}/{}".format(
         str(long_lambda_output[0]), str(stats_dict["lambdas"]))
     write_pdf_line(pdf, long_lambda_text, 10)
-    text = "   - Longest Lambda:"
-    write_pdf_line(pdf, text, 10)
-    text = "              * Filename: {}".format(str(long_lambda_output[1]['filename']))
-    write_pdf_line(pdf, text, 10)
-    text = "              * Line Number: {}".format(str(long_lambda_output[1]['lineno']))
-    write_pdf_line(pdf, text, 10)
-    text = "              * Lambda Length: {}".format(str(long_lambda_output[1]['line length']))
-    write_pdf_line(pdf, text, 10)
+
+    if long_lambda_output[1] != {}:
+        text = "   - Longest Lambda:"
+        write_pdf_line(pdf, text, 10)
+        text = "              * Filename: {}".format(str(long_lambda_output[1]['filename']))
+        write_pdf_line(pdf, text, 10)
+        text = "              * Line Number: {}".format(str(long_lambda_output[1]['lineno']))
+        write_pdf_line(pdf, text, 10)
+        text = "              * Lambda Length: {}".format(str(long_lambda_output[1]['line length']))
+        write_pdf_line(pdf, text, 10)
 
     # Print Long List Comprehension
     header_text = "[ Long List Comprehension ]"

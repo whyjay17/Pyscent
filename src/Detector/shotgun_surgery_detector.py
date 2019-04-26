@@ -17,6 +17,8 @@ def shotgun_output_formatter(output_list):
     for key in output_list:
         smelly_class += len(output_list[key])
 
+    top_class = ('N/A', 'N/A', 'N/A')
+
     for fileName in output_list:
         for className in output_list[fileName]:
             if most_external_call < len(output_list[fileName][className]) - 1:
