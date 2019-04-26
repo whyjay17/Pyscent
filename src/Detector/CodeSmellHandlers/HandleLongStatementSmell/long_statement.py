@@ -20,7 +20,6 @@ def generate_log(output_list,type):
     if type == ast.Lambda:
         log = open(os.path.join("output", "logs", "long_lambda_logs"), "w")
     else:
-        
         log = open(os.path.join("output", "logs", "long_list_comp_logs"), "w")
     for file in output_list:
         filename = file[0]
@@ -31,6 +30,7 @@ def generate_log(output_list,type):
                 metric = len(stmt_lineno[0])
             log.write("filename: " + filename + " lineno: " + str(stmt_lineno[1]) + " metric: " + str(
                 len(stmt_lineno[0])) + "\n")
+    log.close()
     return worst
 
 
