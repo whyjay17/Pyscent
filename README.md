@@ -1,4 +1,4 @@
-# CS527 Project
+# Pyscent (CS527 Project)
 ## Project Idea
 ### Problem Definition
 - Detect code smells in Python code
