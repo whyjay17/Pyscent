@@ -146,7 +146,7 @@ def detect_main(directory):
     # Print Long Lambda
     header_text = "[ Long Lambda ]"
     write_pdf_line(pdf, header_text, 10)
-    long_lambda_output = detect_long_lambda(directory, 30)
+    long_lambda_output = detect_long_lambda(directory, 60)
     long_lambda_text = "   - Number of Long Lambda Functions / Number of Lambda Functions: {}/{}".format(
         str(long_lambda_output[0]), str(stats_dict["lambdas"]))
     write_pdf_line(pdf, long_lambda_text, 10)
@@ -164,7 +164,7 @@ def detect_main(directory):
     # Print Long List Comprehension
     header_text = "[ Long List Comprehension ]"
     write_pdf_line(pdf, header_text, 10)
-    long_list_comp_output = detect_long_list_comp(directory, 30)
+    long_list_comp_output = detect_long_list_comp(directory, 72)
     long_list_comp_text = "   - Number of Long List Comprehension / Number of List Comprehensions: {}/{}".format(
         str(long_list_comp_output[0]), str(stats_dict["listcomps"]))
     write_pdf_line(pdf, long_list_comp_text, 10)
