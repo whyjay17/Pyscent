@@ -177,10 +177,12 @@ def detect_main(directory):
     text = "              * List Comprehension Length: {}".format(str(long_list_comp_output[1]['line length']))
     write_pdf_line(pdf, text, 10)
 
+    line = "================================================================================="
+    write_pdf_line(pdf, line, 20)
+
     add_viz()
 
     plot_dir = os.path.join("plots")
-
     for filename in os.listdir(plot_dir):
         pdf.image(os.path.join("plots", filename), w = pdf.w/3.0, h = pdf.h/5.0)
         pdf.ln(0.15)

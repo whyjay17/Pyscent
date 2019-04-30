@@ -95,7 +95,7 @@ def generate_log(dirname, log_object):
     for smell in log_object:  
         if not os.path.exists(os.path.join("output", "logs")):
             os.makedirs(os.path.join("output", "logs"))
-        log = open(os.path.join("output", "logs", "{}_logs").format(smell), "w")
+        log = open(os.path.join("output", "logs", "{}_logs.txt").format(smell), "w")
         for elem in log_object[smell]:
             log.write('filename: {}, smelly_lines: {}, metric: {}\n'.format(elem['filename'], str(elem['lineno']), str(elem['metric'])))
     log.close()

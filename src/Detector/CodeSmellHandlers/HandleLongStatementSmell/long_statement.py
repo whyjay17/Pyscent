@@ -18,9 +18,9 @@ def generate_log(output_list,type):
     worst = {}
     metric = 0
     if type == ast.Lambda:
-        log = open(os.path.join("output", "logs", "long_lambda_logs"), "w")
+        log = open(os.path.join("output", "logs", "long_lambda_logs.txt"), "w")
     else:
-        log = open(os.path.join("output", "logs", "long_list_comp_logs"), "w")
+        log = open(os.path.join("output", "logs", "long_list_comp_logs.txt"), "w")
     for file in output_list:
         filename = file[0]
         stmt_lineno_list = file[1]

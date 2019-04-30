@@ -15,7 +15,7 @@ def detect_useless_exception(directory):
 
 def generate_log(dir_name, output_list):
     log_count = 0
-    log = open(os.path.join("output", "logs", "useless_exception_logs"), "w")
+    log = open(os.path.join("output", "logs", "useless_exception_logs.txt"), "w")
     for file in output_list:
         filename = file[0]
         smelly_lineno_list = file[1]
