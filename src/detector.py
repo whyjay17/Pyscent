@@ -168,14 +168,16 @@ def detect_main(directory):
     long_list_comp_text = "   - Number of Long List Comprehension / Number of List Comprehensions: {}/{}".format(
         str(long_list_comp_output[0]), str(stats_dict["listcomps"]))
     write_pdf_line(pdf, long_list_comp_text, 10)
-    text = "   - Longest List Comprehension:"
-    write_pdf_line(pdf, text, 10)
-    text = "              * Filename: {}".format(str(long_list_comp_output[1]['filename']))
-    write_pdf_line(pdf, text, 10)
-    text = "              * Line Number: {}".format(str(long_list_comp_output[1]['lineno']))
-    write_pdf_line(pdf, text, 10)
-    text = "              * List Comprehension Length: {}".format(str(long_list_comp_output[1]['line length']))
-    write_pdf_line(pdf, text, 10)
+
+    if long_list_comp_output[1] != {}:
+        text = "   - Longest List Comprehension:"
+        write_pdf_line(pdf, text, 10)
+        text = "              * Filename: {}".format(str(long_list_comp_output[1]['filename']))
+        write_pdf_line(pdf, text, 10)
+        text = "              * Line Number: {}".format(str(long_list_comp_output[1]['lineno']))
+        write_pdf_line(pdf, text, 10)
+        text = "              * List Comprehension Length: {}".format(str(long_list_comp_output[1]['line length']))
+        write_pdf_line(pdf, text, 10)
 
     line = "================================================================================="
     write_pdf_line(pdf, line, 20)
